@@ -1,6 +1,5 @@
 package com.example.crud.mongodb.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,47 +8,33 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
-@Document(collection = "employee")
+@Document(collection = "student")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Employee {
+public class Student {
 
     @Transient
-    public static final String SEQUENCE_NAME = "users_sequence";
+    public static final String SEQUENCE_NAME = "student_sequence";
 
     @Id
-    private long id;
+    private Long id;
 
     @NotBlank
     @Size(min = 3, max = 100)
     @Indexed(unique = true)
-    private String firstName;
-    private String lastName;
+    private String name;
 
     @NotBlank
     @Size(max = 100)
     @Indexed(unique = true)
     private String emailId;
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", emailId='" + emailId + '\'' +
-                '}';
-    }
-
-    public Employee(String firstName, String lastName, String emailId){
-        this.firstName=firstName;
-        this.lastName=lastName;
+    public Student(String name, String emailId){
+        this.name=name;
         this.emailId=emailId;
     }
 }
